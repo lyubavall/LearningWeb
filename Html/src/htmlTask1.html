@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Сделать заказ в кафе Веселые Сырнички</title>
+</head>
+<body>
+<form action="" method="post">
+    <fieldset>
+        <legend>Сделайте заказ у нас!</legend>
+        <label><input type="checkbox" name="option1" value="1">Сырники классические<br/></label>
+        <label><input type="checkbox" name="option2" value="2">Сырники диетические с овсяными хлопьями<br/></label>
+        <label><input type="checkbox" name="option3" value="3">Сырники с зеленью<br/></label>
+        <label><input type="checkbox" name="option4" value="4">Сырники запеченные<br/></label>
+        <label><input type="checkbox" name="option5" value="5">Сырники морковные<br/></label>
+        <label><input type="checkbox" name="option6" value="6">Сырники цитрусовые<br/></label>
+        <label><input type="checkbox" name="option7" value="7">Сырники с манкой<br/></label>
+        <label><input type="checkbox" name="option8" value="8">Сырники из рикотты с бананом<br/></label>
+        <label><input type="checkbox" name="option9" value="9">Сырники с ягодами<br/></label>
+        <label><input type="checkbox" name="option10" value="10">Краковский сырник<br/></label>
+
+        <p>С каким соусом подать?</p>
+        <select name="sauce" multiple>
+            <option value="0" selected>Без соуса</option>
+            <option value="1">Сметана</option>
+            <option value="2">Сгущенка</option>
+            <option value="3">Брусничный</option>
+            <option value="4">Клубничный</option>
+            <option value="6">Кленовый сироп</option>
+            <option value="7">Взбитые сливки</option>
+        </select>
+
+        <div>
+            <select name="delivery">
+                <option selected="selected">Доставка</option>
+                <option value="1">Самовывоз</option>
+                <option value="2">Курьер</option>
+            </select>
+        </div>
+
+        <div>
+            Оплата
+            <label><input type="radio" value="1" name="pay" checked="checked"> наличными</label>
+            <label><input type="radio" value="2" name="pay"> картой</label>
+        </div>
+
+        <div>
+            <label>
+                Имя <input type="text" name="clientName">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Номер телефона <input type="text" name="clientTel">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Комментарий <textarea name="comment"></textarea>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Двойная порция <input name="double" type="checkbox">
+            </label>
+        </div>
+
+        <div>
+            <button type="submit">Заказать</button>
+        </div>
+    </fieldset>
+</form>
+<p>По вопросам звоните <a href="tel:+79131231234">+79131231234</a></p>
+<a href="htmlTask2.html">Вернуться обратно на основной сайт</a>
+</body>
+</html>
