@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+table {
+    font-family: "Segoe UI Historic", sans-serif;
+    font-size: 0.875rem;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+table, th, td {
+    border: 0.0625rem solid #cccccc;
+}
+
+.column1 {
+    width: 7.625rem;
+}
+
+.column2 {
+    width: 7.625rem;
+}
+
+.column3 {
+    width: 13.25rem;
+}
+
+.column4 {
+    width: 8.69rem;
+}
+
+th, td {
+    height: 2.23rem;
+    padding: 0.56rem;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #eeeeee;
+}
+
