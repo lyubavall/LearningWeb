@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #feeed6;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
+    color: #676565;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.title h1 {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.64rem;
+    font-weight: 500;
+    color: #676565;
+}
+
+.title {
+    background-color: white;
+    padding: 1rem;
+    height: 3.2rem;
+}
+
+form {
+    padding: 0.5rem 1rem 1rem;
+    max-width: 45.75rem;;
+}
+
+p {
+    margin: 0.3125rem 0;
+}
+
+.items {
+    height: 3.5rem;
+    margin-top: 0;
+    margin-bottom: 0.9375rem;
+}
+
+.comment {
+    height: 7.25rem;
+}
+
+.items input {
+    width: 100%;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
+    color: #676565;
+}
+
+.items textarea {
+    height: 5.3125rem;
+    width: 100%;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
+    color: #676565;
+}
+
+.items p {
+    font-weight: 700;
+}
+
+[placeholder] {
+    padding: 0.625rem 0.75rem;
+}
+
+.text-before-button {
+    margin-top: 0;
+    margin-bottom: 0.625rem;
+}
+
+button {
+    background-color: #378db2;
+    border: none;
+    color: white;
+    padding: 0.375rem 0.75rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    height: 2rem;
+    float: right;
+}
