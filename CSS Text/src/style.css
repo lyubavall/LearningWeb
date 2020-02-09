@@ -1,32 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: rgb(254, 238, 214);
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(105, 102, 103);
+}
+
+.sheet {
+    max-width: 44.9rem;
+    margin-left: 0.55rem;
+    margin-right: 0.55rem;
+
+}
+
+h1.grey-text {
+    font-size: 1.69rem;
+    margin: 0 0 0.65rem;
+    padding: 0.33rem 0 0 0;
+    line-height: 1.11;
+}
+
+.blue-text {
+    color: rgb(55, 141, 178);
+    font-weight: bold;
+    font-size: 1.05rem;
+    margin: 0 0 0.55rem;
+}
+
+.contents {
+    margin-top: 0.721rem;
+    margin-bottom: 0.35rem;
 }
 
 .grey-text {
-    font-family: Arial, Helvetica, sans-serif;
     color: rgb(105, 102, 103);
     font-weight: 100;
 }
 
-.blue-text {
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(55, 141, 178);
-    font-weight: bold;
-    font-size: 1.05rem;
-    margin: 0.5rem;
-}
-
-h1.grey-text {
-    font-size: 1.6rem;
-    margin: 0.5rem;
-}
 
 p.grey-text {
     text-indent: 15px;
     text-align: justify;
     line-height: 1.4em;
-    margin: 0.5rem;
-    font-size: 0.96rem;
+    font-size: 0.9625rem;
+    margin: 0 0 0.5rem;
 }
 
 .strikethrough {
