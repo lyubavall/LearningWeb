@@ -2,44 +2,43 @@
     box-sizing: border-box;
 }
 
-table {
+table.table {
     font-family: "Segoe UI Historic", sans-serif;
-    font-size: 0.875rem;
+    font-size: 1.25rem;
     border-collapse: collapse;
     text-align: left;
 }
 
-table, th, td {
-    border: 0.0625rem solid #cccccc;
+table.table, .table th, .table td {
+    border: 1px solid #cccccc;
 }
 
 .column1 {
-    width: 7.625rem;
+    width: 10.9375rem;
 }
 
 .column2 {
-    width: 7.625rem;
+    width: 10.875rem;
 }
 
 .column3 {
-    width: 13.25rem;
+    width: 19.375rem;
 }
 
 .column4 {
-    width: 8.69rem;
+    width: 12.5rem;
 }
 
-th, td {
-    height: 2.23rem;
-    padding: 0.56rem;
+.table th, .table td {
+    padding: 0.875rem 0.875rem 0.875rem 0.65rem;
 }
 
-th {
+.table th {
     background-color: #3498db;
-    color: white;
+    color: #fff;
 }
 
-tbody tr:nth-child(odd) {
+.table tbody tr:nth-child(odd) {
     background-color: #eeeeee;
 }
 
