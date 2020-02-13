@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
-    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -11,37 +11,39 @@
     <h1>Отправить заявку</h1>
 </div>
 
-<form action="" method="post">
-    <div class="items">
-        <p>Ваше имя</p>
-        <label>
-            <input placeholder="Ваше имя *" type="text" name="clientName" required="required">
-        </label>
-    </div>
+<div class="form">
+    <form action="" method="post">
+        <div class="items">
+            <p>Ваше имя</p>
+            <label>
+                <input placeholder="Ваше имя *" type="text" name="clientName" required="required">
+            </label>
+        </div>
 
-    <div class="items">
-        <p>Ваш номер телефона</p>
-        <label>
-            <input placeholder="Ваш номер телефона *" type="text" name="clientTel" required="required">
-        </label>
-    </div>
+        <div class="items">
+            <p>Ваш номер телефона</p>
+            <label>
+                <input placeholder="Ваш номер телефона *" type="text" name="clientTel" required="required">
+            </label>
+        </div>
 
-    <div class="items">
-        <p>Ваш email или VK</p>
-        <label>
-            <input placeholder="Ваш email или VK *" type="text" name="clientEmail" required="required">
-        </label>
-    </div>
+        <div class="items">
+            <p>Ваш email или VK</p>
+            <label>
+                <input placeholder="Ваш email или VK *" type="text" name="clientEmail" required="required">
+            </label>
+        </div>
 
-    <div class="items comment">
-        <p>Комментарий</p>
-        <label>
-            <textarea placeholder="Комментарий (не обязательно)" name="comment"></textarea>
-        </label>
-    </div>
+        <div class="items comment">
+            <p>Комментарий</p>
+            <label>
+                <textarea placeholder="Комментарий (не обязательно)" name="comment"></textarea>
+            </label>
+        </div>
 
-    <p class="text-before-button">Заполните и отправьте форму, и мы перезвоним Вам по указанному номеру</p>
-    <button type="submit">Отправить заявку</button>
-</form>
+        <p class="text-before-button">Заполните и отправьте форму, и мы перезвоним Вам по указанному номеру</p>
+        <button type="submit">Отправить заявку</button>
+    </form>
+</div>
 </body>
 </html>

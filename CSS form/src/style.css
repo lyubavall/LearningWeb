@@ -5,7 +5,7 @@
 body {
     background-color: #feeed6;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: #676565;
     margin: 0;
     padding: 0;
@@ -14,75 +14,84 @@ body {
 
 .title h1 {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.64rem;
+    font-size: 2.15rem;
     font-weight: 500;
-    color: #676565;
 }
 
 .title {
     background-color: white;
     padding: 1rem;
-    height: 3.2rem;
+    height: 3.7rem;
 }
 
-form {
-    padding: 0.5rem 1rem 1rem;
-    max-width: 45.75rem;;
-}
-
-p {
-    margin: 0.3125rem 0;
+div.form {
+    padding: 0.9rem 1rem 1rem;
+    max-width: 52.1rem;;
 }
 
 .items {
     height: 3.5rem;
     margin-top: 0;
-    margin-bottom: 0.9375rem;
+    margin-bottom: 1.8rem;
 }
 
 .comment {
-    height: 7.25rem;
+    height: 100%;
+    margin-bottom: 1.1rem;
 }
 
 .items input {
     width: 100%;
     border: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.875rem;
-    color: #676565;
 }
 
 .items textarea {
-    height: 5.3125rem;
+    height: 8rem;
     width: 100%;
     border: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.875rem;
-    color: #676565;
+    resize: vertical;
 }
 
 .items p {
     font-weight: 700;
+    margin: 0.345rem 0;
 }
 
-[placeholder] {
-    padding: 0.625rem 0.75rem;
+.form [placeholder] {
+    padding: 0.68rem 0.75rem;
+}
+
+.form input::placeholder, .form textarea::placeholder { /* Firefox, Chrome, Opera */
+    color: #9999af;
+}
+
+.form input:-ms-input-placeholder, .form textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #9999af;
+}
+
+.form input::-ms-input-placeholder, .form textarea::-ms-input-placeholder { /* Microsoft Edge */
+    color: #9999af;
 }
 
 .text-before-button {
     margin-top: 0;
     margin-bottom: 0.625rem;
+    color: #8f8c87;
 }
 
-button {
+.form button {
     background-color: #378db2;
     border: none;
     color: white;
-    padding: 0.375rem 0.75rem;
+    padding: 0.65rem 0.85rem;
     text-align: center;
     font-weight: 700;
-    font-size: 0.875rem;
-    height: 2rem;
+    font-size: 1.0rem;
+    height: 2.2rem;
     float: right;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: #32728d;
 }
