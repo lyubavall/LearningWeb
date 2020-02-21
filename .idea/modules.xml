@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/Learn-javascript-ru/Learn-javascript-ru.iml" filepath="$PROJECT_DIR$/Learn-javascript-ru/Learn-javascript-ru.iml" />
       <module fileurl="file://$PROJECT_DIR$/LearningWeb.iml" filepath="$PROJECT_DIR$/LearningWeb.iml" />
       <module fileurl="file://$PROJECT_DIR$/Work with arrays/Work with arrays.iml" filepath="$PROJECT_DIR$/Work with arrays/Work with arrays.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Work with objects/Work with objects.iml" filepath="$PROJECT_DIR$/Work with objects/Work with objects.iml" />
     </modules>
   </component>
 </project>
