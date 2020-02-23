@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Перевод температуры</title>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="convert-page">
+    <div class="title">Перевод температуры</div>
+
+    <div class="frame">
+        <div class="block-items">
+            <p>Введите температуру в градусах Цельсия:</p>
+            <label>
+                <input type="text" id="input" required="required">
+            </label>
+        </div>
+
+        <div class="convert-button block-items">
+            <button type="button" id="button">Конвертировать</button>
+        </div>
+
+        <div class="block-items">
+            <p>В градусах Фаренгейта:</p>
+            <label>
+                <input type="text" id="fahrenheit" readonly>
+            </label>
+        </div>
+
+        <div class="block-items">
+            <p>В Кельвинах:</p>
+            <label>
+                <input type="text" id="kelvin" readonly>
+            </label>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

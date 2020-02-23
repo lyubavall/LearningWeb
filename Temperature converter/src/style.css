@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.convert-page {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.frame {
+    background: #f0eee0;
+    padding: 1rem;
+    border-radius: 7px;
+}
+
+.block-items {
+    margin: 1rem 0 0;
+}
+
+.title {
+    font-size: 1.5rem;
+    margin: 3rem 0 2rem 0;
+    text-align: center;
+}
+
+.convert-button {
+    margin-bottom: 3rem;
+}
+
+.convert-button button {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    border-radius: .25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.block-items input {
+    width: 80%;
+}
