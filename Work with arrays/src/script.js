@@ -16,10 +16,10 @@
     function getEvenNumbersSum(array) {
         return array.reduce(function (sum, number) {
             if (number % 2 === 0) {
-                sum += number;
+                return sum + number;
+            } else {
+                return sum;
             }
-
-            return sum;
         }, 0);
     }
 
@@ -34,15 +34,11 @@
     }
 
     function getEvenNumbersSquares(array) {
-        var evenNumbers = [];
-
-        array.forEach(function (number) {
-            if (number % 2 === 0) {
-                evenNumbers.push(Math.pow(number, 2));
-            }
+        return array.filter(function (number) {
+            return number % 2 === 0;
+        }).map(function (e) {
+            return Math.pow(e, 2);
         });
-
-        return evenNumbers;
     }
 
     var array = [4, 8, -9, 0, 10, -1, 7, 1, 2, 5];
