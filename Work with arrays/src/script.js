@@ -17,9 +17,8 @@
         return array.reduce(function (sum, number) {
             if (number % 2 === 0) {
                 return sum + number;
-            } else {
-                return sum;
             }
+            return sum;
         }, 0);
     }
 
