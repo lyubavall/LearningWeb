@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.todo-center-page {
+    width: 60%;
+    min-height: 100vh;
+    margin: 0 auto;
+    background-color: #c6e9e3;
+    padding: 2rem;
+    border-radius: 7px;
+}
+
+.title {
+    font-size: 1.5rem;
+    margin: 0 0 2rem 0;
+    text-align: center;
+    font-weight: 500;
+}
+
+.add-field input {
+    margin: 0;
+    width: 100%;
+    height: 2.2rem;
+}
+
+.add-field {
+    width: calc(99% - 4rem);
+}
+
+.button button {
+    background-color: #ffc83d;
+    width: 4rem;
+    height: 2.2rem;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.0rem;
+    cursor: pointer;
+}
+
+.inline {
+    display: inline-block;
+    vertical-align: center;
+}
+
+.todo-list ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 2.2rem;
+}
+
+.todo-list li:before {
+    color: #fbe18c;
+    content: "\2B50";
+    padding-right: 10px;
+}
+
+.todo-list li.checked {
+    text-decoration: line-through;
+}
+
+.todo-list li {
+    cursor: pointer;
+    vertical-align:middle;
+}
+
+.edit button {
+    cursor: pointer;
+    float: right;
+    vertical-align: middle;
+    margin-top: 6px;
+}
+
