@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    font-family: Verdana, Arial, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+.phone-book-page {
+    width: 60%;
+    height: 100%;
+    margin: 0 auto;
+    border: 2px solid #bb9d8b;
+    border-radius: 7px;
+    display: flex;
+    flex-flow: column;
+    box-shadow: 0 0 10px 0 rgb(186, 186, 186);
+}
+
+.title {
+    background-color: #6d7d62;
+    color: #fff;
+    margin: 0;
+    border: 2px solid #6d7d62;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    height: 80px;
+    text-align: center;
+    vertical-align: middle;
+    opacity: .8;
+}
+
+.contact-table table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+    border-top: 2px solid #bb9d8b;
+    border-bottom: 2px solid #bb9d8b;
+}
+
+.contact-table th {
+    background-color: #252b1f;
+    color: #fff;
+    opacity: .8;
+}
+
+.contact-table tr:nth-child(even) {
+    background-color: #c3c9cd;
+}
+
+.contact-table tr {
+    height: 35px;
+}
+
+.column1, .column5 {
+    width: 5%;
+}
+
+.column2, .column3, .column4 {
+    width: 30%;
+}
+
+.form-out {
+    height: 100%;
+    background-color: rgba(195, 201, 205, 0.2);
+    flex: 1 1 auto;
+}
+
+.form-to-fill {
+    background-color: rgba(209, 202, 198, 0.5);
+    opacity: .9;
+    width: 60%;
+    margin: 25px auto;
+    padding: 20px;
+    border: 2px solid #bb9d8b;
+    border-radius: 7px;
+    box-shadow: 0 0 7px 0 rgb(186, 186, 186);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.item {
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.item input {
+    width: 100%;
+    height: 30px;
+}
+
+.add-button {
+    text-align: center;
+}
+
+.add-button button {
+    background-color: #6d7d62;
+    color: #fff;
+    padding: 7px;
+    border-radius: 7px;
+    border: 2px solid #252b1f;
+    cursor: pointer;
+}
+
+.form-to-fill [placeholder] {
+    padding: 0.68rem;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #F08080;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #F08080;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #F08080;
+}
+
+button.delete_button {
+    background-color: #6d7d62;
+    color: #fff;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: 2px solid #252b1f;
+    border-radius: 3px;
+}
+
+input.emptyField {
+    border: 2px solid #F08080;
+}
+
+
+
+
