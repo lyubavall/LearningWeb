@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
         var span = document.createElement("SPAN");
 
         deleteButton.textContent = "\u00D7";
-        deleteButton.setAttribute('title',"Delete item");
+        deleteButton.setAttribute("title", "Delete item");
         editButton.textContent = "\u270E";
-        editButton.setAttribute('title',"Edit item");
+        editButton.setAttribute("title", "Edit item");
 
         span.className = "edit";
         span.appendChild(deleteButton);
@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
         deleteButton.style.display = "none";
 
         saveButton.addEventListener("click", function () {
-            if(editField.value === ""){
+            if (editField.value === "") {
                 editField.setAttribute("placeholder", "Enter a note")
-            }else {
+            } else {
                 el.firstChild.textContent = editField.value;
                 el.removeChild(editField);
                 parent.removeChild(saveButton);
