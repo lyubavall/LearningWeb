@@ -57,19 +57,19 @@ body {
     line-height: 2.2rem;
 }
 
-.todo-list li:before {
-    color: #fbe18c;
-    content: "\2B50";
-    padding-right: 10px;
+.todo-list input {
+    margin-right: 5px;
+    cursor: pointer;
+    vertical-align: middle;
 }
 
-.todo-list li.checked {
+span.checked {
     text-decoration: line-through;
 }
 
 .todo-list li {
     cursor: pointer;
-    vertical-align:middle;
+    vertical-align: middle;
 }
 
 .edit button {

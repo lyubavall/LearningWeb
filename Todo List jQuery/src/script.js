@@ -4,11 +4,11 @@ $(document).ready(function () {
     var addButton = $("#add-button");
 
     function createTodoItem(text) {
-        var li = $("<li>");
+        var li = $("<li><label><input type='checkbox' name='' value='1'><span class='itemText'></span></label></li>");
         var editButton = $("<button type='button' title='Edit item'>\u270E</button>");
         var deleteButton = $("<button type='button' title='Delete item'>\u00D7</button>");
 
-        li.text(text);
+        li.find(".itemText").text(text);
         toDoList.append(li);
 
         var span = $("<span class='edit'></span>");
@@ -23,17 +23,21 @@ $(document).ready(function () {
 
         editButton.click(function () {
             editTodoItem(li, span, editButton, deleteButton);
-        })
+        });
+
+        li.find("label").click(function () {
+            li.find(".itemText").toggleClass("checked", li.find("input").is(":checked"));
+        });
     }
 
     function editTodoItem(li, span, editButton, deleteButton) {
         var saveButton = $("<button type='button' title='Save'>💾</button>");
         var cancelButton = $("<button type='button' title='Cancel'>\u21bb</button>");
         var editField = $("<input type='text'>");
-        var oldText = li[0].firstChild.textContent;
+        var oldText = li.find(".itemText").text();
 
         editField.val(oldText);
-        li[0].firstChild.textContent = "";
+        li.find(".itemText").text("");
 
         span.append(saveButton);
         span.append(cancelButton);
@@ -46,7 +50,7 @@ $(document).ready(function () {
             if (editField.val() === "") {
                 editField.attr("placeholder", "Enter a note")
             } else {
-                li[0].firstChild.textContent = editField.val();
+                li.find(".itemText").text(editField.val());
                 editField.remove();
                 saveButton.remove();
                 cancelButton.remove();
@@ -56,7 +60,7 @@ $(document).ready(function () {
         });
 
         cancelButton.click(function () {
-            li[0].firstChild.textContent = oldText;
+            li.find(".itemText").text(oldText);
             editField.remove();
             saveButton.remove();
             cancelButton.remove();
@@ -74,11 +78,5 @@ $(document).ready(function () {
 
         createTodoItem(text);
         newToDoField.val("");
-    });
-
-    toDoList.click(function (e) {
-        if (e.target.tagName === "LI") {
-            e.target.classList.toggle("checked");
-        }
     });
 });
