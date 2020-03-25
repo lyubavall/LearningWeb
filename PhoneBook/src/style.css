@@ -56,11 +56,11 @@ body {
     height: 35px;
 }
 
-.column1, .column5 {
+.number-col, .delete-col {
     width: 5%;
 }
 
-.column2, .column3, .column4 {
+.surname-col, .name-col, .telephone-col {
     width: 30%;
 }
 
