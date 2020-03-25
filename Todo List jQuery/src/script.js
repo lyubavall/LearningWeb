@@ -4,11 +4,11 @@ $(document).ready(function () {
     var addButton = $("#add-button");
 
     function createTodoItem(text) {
-        var li = $("<li><label><input type='checkbox' name='' value='1'><span class='itemText'></span></label></li>");
+        var li = $("<li><label><input type='checkbox' class='checkbox' name='' value='1'><span class='item-text'></span></label></li>");
         var editButton = $("<button type='button' title='Edit item'>\u270E</button>");
         var deleteButton = $("<button type='button' title='Delete item'>\u00D7</button>");
 
-        li.find(".itemText").text(text);
+        li.find(".item-text").text(text);
         toDoList.append(li);
 
         var span = $("<span class='edit'></span>");
@@ -26,18 +26,18 @@ $(document).ready(function () {
         });
 
         li.find("label").click(function () {
-            li.find(".itemText").toggleClass("checked", li.find("input").is(":checked"));
+            li.find(".item-text").toggleClass("checked", li.find("input").is(":checked"));
         });
     }
 
     function editTodoItem(li, span, editButton, deleteButton) {
         var saveButton = $("<button type='button' title='Save'>💾</button>");
         var cancelButton = $("<button type='button' title='Cancel'>\u21bb</button>");
-        var editField = $("<input type='text'>");
-        var oldText = li.find(".itemText").text();
+        var editField = $("<input type='text' class='edit-field'>");
+        var oldText = li.find(".item-text").text();
 
         editField.val(oldText);
-        li.find(".itemText").text("");
+        li.find(".item-text").text("");
 
         span.append(saveButton);
         span.append(cancelButton);
@@ -48,9 +48,9 @@ $(document).ready(function () {
 
         saveButton.click(function () {
             if (editField.val() === "") {
-                editField.attr("placeholder", "Enter a note")
+                editField.prop("placeholder", "Enter a note");
             } else {
-                li.find(".itemText").text(editField.val());
+                li.find(".item-text").text(editField.val());
                 editField.remove();
                 saveButton.remove();
                 cancelButton.remove();
@@ -60,7 +60,7 @@ $(document).ready(function () {
         });
 
         cancelButton.click(function () {
-            li.find(".itemText").text(oldText);
+            li.find(".item-text").text(oldText);
             editField.remove();
             saveButton.remove();
             cancelButton.remove();

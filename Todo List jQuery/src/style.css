@@ -44,11 +44,12 @@ body {
     font-weight: 600;
     font-size: 1.0rem;
     cursor: pointer;
+    border: 0;
 }
 
 .inline {
     display: inline-block;
-    vertical-align: center;
+    vertical-align: middle;
 }
 
 .todo-list ul {
@@ -58,8 +59,7 @@ body {
 }
 
 .todo-list input {
-    margin-right: 5px;
-    cursor: pointer;
+    margin-right: 2px;
     vertical-align: middle;
 }
 
@@ -67,15 +67,20 @@ span.checked {
     text-decoration: line-through;
 }
 
-.todo-list li {
-    cursor: pointer;
-    vertical-align: middle;
-}
-
 .edit button {
     cursor: pointer;
     float: right;
     vertical-align: middle;
-    margin-top: 6px;
+    margin-top: 7px;
 }
+
+.checkbox {
+    cursor: pointer;
+    margin-right: 2px;
+}
+
+input.edit-field {
+    width: 88%;
+}
+
 
