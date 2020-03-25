@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>TODO LIST</title>
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div v-cloak id="to-do-list">
+    <div class="container-fluid todo-center-page p-md-3">
+        <div class="row justify-content-center title">
+            <h1 class="title">To-do List</h1>
+        </div>
+
+        <div class="container add-field">
+            <add-form @add-todo="addTodo"></add-form>
+        </div>
+
+        <div class="container ul-container">
+            <div class="todo-list">
+                <ul class="list-group list-group-flush">
+                    <todo-items v-for="item in list" :key="item.id" :item="item" @delete-item="deleteItem"
+                                @save-item="saveItem"></todo-items>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="add-form-template" type="text/x-template">
+    <div class="row">
+        <div class="col-12 input-div col-md-11">
+            <form class="form-group">
+                <input v-model="newTodoText" :class="{'empty-add': isEmptyAdd}" class="form-control" type="text"
+                       placeholder="Add new todo" required>
+                <div class="invalid-feedback">
+                    Please choose a username.
+                </div>
+            </form>
+        </div>
+
+        <div class="button-add col-12 col-md-1">
+            <button @click="addTodo" type="button" class="btn btn-warning float-right">Add</button>
+        </div>
+    </div>
+</script>
+
+<script id="todo-items-template" type="text/x-template">
+    <li :key="item.id" class="list-group-item">
+        <div class="row justify-content-between li-div">
+            <div class="col-12 col-md-11 pl-0 item">
+                <label class="mb-0">
+                    <input class="checkbox" type='checkbox' name='' value='1'>
+                    <div v-if="!isEditing" v-text="item.text" class="item-text"></div>
+                </label>
+                <input v-if="isEditing" v-model="revisedText" :class="{empty: isEmpty}"
+                       class="form-control edit-input empty-field" type="text" placeholder="Enter todo">
+            </div>
+
+            <div class="col-1 col-md-1 edit-btn btn-group float-right">
+                <button v-if="!isEditing" @click="editItem" type="button" title="Edit item"
+                        class="btn btn-light float-right">&#9998
+                </button>
+                <button v-if="!isEditing" @click="deleteItem" type="button" title="Delete item"
+                        class="btn btn-light float-right pr-2 pl-1">&#215
+                </button>
+                <button v-if="isEditing" @click="saveItem" type="button" title="Save"
+                        class="btn btn-light float-right"> 💾
+                </button>
+                <button v-if="isEditing" @click="cancelEdit" type="button" title="Cancel"
+                        class="btn btn-light float-right pr-1 pl-1">&#8635
+                </button>
+            </div>
+        </div>
+    </li>
+</script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
