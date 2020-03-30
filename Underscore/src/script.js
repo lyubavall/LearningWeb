@@ -47,16 +47,15 @@
         }
     ];
 
+    if(list.length === 0){
+        console.log("Список пуст");
+    } else {
+        var averageAge = _.reduce(list, function (sum, person) {
+            return sum + person.age;
+        }, 0) / list.length;
 
-   if(list.length === 0){
-       console.log("Список пуст");
-   } else {
-       var averageAge = _.reduce(list, function (sum, person) {
-           return sum + person.age;
-       }, 0) / list.length;
-
-       console.log("Средний возраст: " + averageAge);
-   }
+        console.log("Средний возраст: " + averageAge);
+    }
 
     var sortedList = _.chain(list)
         .filter(function (person) {
