@@ -47,15 +47,20 @@
         }
     ];
 
-    var averageAge = _.reduce(list, function (sum, person) {
-        return sum + person.age;
-    }, 0) / list.length || 1;
 
-    console.log("Средний возраст: " + averageAge);
+   if(list.length === 0){
+       console.log("Список пуст");
+   } else {
+       var averageAge = _.reduce(list, function (sum, person) {
+           return sum + person.age;
+       }, 0) / list.length;
+
+       console.log("Средний возраст: " + averageAge);
+   }
 
     var sortedList = _.chain(list)
         .filter(function (person) {
-            return person.age <= 30 && person.age >= 20;
+            return person.age >= 20&&person.age <= 30;
         })
         .sortBy("age")
         .value();
@@ -63,8 +68,8 @@
     console.log("Люди от 20 до 30 по возрастанию:");
     console.log(sortedList);
 
-    _.map(list, function (person) {
-        return _.extend(person, {fullName: person.name + " " + person.lastName});
+    _.each(list, function (person) {
+        person.fullName = person.name + " " + person.lastName;
     });
 
     console.log("Добавили поле fullName:");
