@@ -26,7 +26,7 @@ Vue.component("add-form", {
     }
 });
 
-Vue.component("todo-items", {
+Vue.component("todo-item", {
     props: {
         item: {
             type: Object,
@@ -40,7 +40,7 @@ Vue.component("todo-items", {
             isEmpty: false
         }
     },
-    template: "#todo-items-template",
+    template: "#todo-item-template",
     methods: {
         deleteItem: function () {
             this.$emit("delete-item", this.item);
@@ -61,6 +61,7 @@ Vue.component("todo-items", {
         cancelEdit: function () {
             this.isEditing = false;
             this.isEmpty = false;
+            this.revisedText = this.item.text;
         }
     }
 });
