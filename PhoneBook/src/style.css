@@ -11,7 +11,6 @@ body {
 }
 
 .phone-book-page {
-    width: 60%;
     height: 100%;
     margin: 0 auto;
     border: 2px solid #bb9d8b;
@@ -21,6 +20,22 @@ body {
     box-shadow: 0 0 10px 0 rgb(186, 186, 186);
 }
 
+@media (min-width: 960px) {
+    .phone-book-page {
+        width: 70%;
+    }
+}
+
+.title h1 {
+    font-size: 1.8rem;
+}
+
+@media (min-width: 960px) {
+    .title h1 {
+        font-size: 2.1rem;
+    }
+}
+
 .title {
     background-color: #6d7d62;
     color: #fff;
@@ -28,7 +43,7 @@ body {
     border: 2px solid #6d7d62;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    height: 80px;
+    min-height: 80px;
     text-align: center;
     vertical-align: middle;
     opacity: .8;
@@ -137,7 +152,7 @@ button.delete_button {
     border-radius: 3px;
 }
 
-input.emptyField {
+input.empty-field {
     border: 2px solid #F08080;
 }
 
