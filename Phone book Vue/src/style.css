@@ -12,7 +12,6 @@ h1 {
 }
 
 .title {
-    padding-left: 3rem;
     background: linear-gradient(to bottom, #2d545e, #788687);
     color: #fff;
 }
@@ -26,7 +25,6 @@ h1 {
 
 .display-4 {
     font-size: 2rem;
-    margin: 0;
 }
 
 @media (min-width: 960px) {
@@ -36,16 +34,29 @@ h1 {
 }
 
 nav.nav {
-    padding-left: 3rem;
+    text-align: justify;
 }
 
-.nav button{
+.nav button {
     color: #6c757d;
 }
 
 div.form-group {
     width: 60%;
     margin: 0 auto;
+}
+.search-panel{
+    width: 100%;
+}
+
+@media (min-width: 960px) {
+    .search-panel {
+        width: 60%;
+    }
+}
+
+.search-button {
+    border-color: #ced4da;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
@@ -57,12 +68,12 @@ button.delete-button {
     background-color: transparent;
 }
 
-.table th{
+.table th {
     background-color: #ebcc9d;
     color: #fff;
     font-family: "Playfair Display", Georgia, "Times New Roman", serif;
     border-color: #c9956d;
-    border-bottom: 1px solid #c9956d!important;
+    border-bottom: 1px solid #c9956d !important;
 }
 
 .table td, .table th {
@@ -83,10 +94,6 @@ button.delete-button {
     text-align: center;
     background-color: #f7fbfc;
     border-top: 0;
-}
-
-.footer p {
-    margin-bottom: 0;
 }
 
 .footer a {

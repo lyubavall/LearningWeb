@@ -1,18 +1,14 @@
 Vue.component("add-contact", {
     props: {
-        isConfirmedPhone: Boolean
-    },
-    watch: {
-        isConfirmedPhone: function (valueAfterConfirmation) {
-            this.isConfirmedPhone = valueAfterConfirmation;
-            console.log('Prop changed: ', valueAfterConfirmation);
-        }
+        isConfirmedPhone: Boolean,
+        contactsCount: null
     },
     data: function () {
         return {
             surname: "",
             name: "",
             phone: "",
+            isSelected: false,
             attemptAdd: false,
             duplicatePhone: false
         }
@@ -27,6 +23,9 @@ Vue.component("add-contact", {
         },
         missingPhone: function () {
             return this.phone === "";
+        },
+        id: function () {
+            return this.contactsCount + 1;
         }
     },
     methods: {
@@ -38,25 +37,44 @@ Vue.component("add-contact", {
             }
 
             this.$nextTick(function () {
-                console.log("nextTick in child component after emit: " + this.isConfirmedPhone);
+                this.duplicatePhone = this.isConfirmedPhone;
+
+                if (this.missingSurname || this.missingName || this.missingPhone || this.duplicatePhone) {
+                    return;
+                }
+
+                this.$emit("add-contact", {
+                    id: this.id,
+                    name: this.name,
+                    surname: this.surname,
+                    phone: this.phone,
+                    isSelected: false,
+                    isShowing: true
+                });
+
+                this.surname = "";
+                this.name = "";
+                this.phone = "";
+                this.attemptAdd = this.isSelected;
             });
+        }
+    }
+});
 
-            this.duplicatePhone = this.isConfirmedPhone;
-
-            if (this.missingSurname || this.missingName || this.missingPhone || this.duplicatePhone) {
-                return;
-            }
-
-            this.$emit("add-contact", {
-                name: this.name,
-                surname: this.surname,
-                phone: this.phone
-            });
-
-            this.surname = "";
-            this.name = "";
-            this.phone = "";
-            this.attemptAdd = false;
+Vue.component("search-panel", {
+    data: function () {
+        return {
+            searchText: ""
+        }
+    },
+    template: "#search-panel-template",
+    methods: {
+        search: function () {
+            this.$emit("search-contact", this.searchText);
+        },
+        cancelSearch: function () {
+            this.searchText = "";
+            this.$emit("search-contact", this.searchText);
         }
     }
 });
@@ -67,7 +85,13 @@ new Vue({
         contacts: [],
         needForm: false,
         currentContact: null,
-        isConfirmedPhone: false
+        isConfirmedPhone: false,
+        isAllSelected: false
+    },
+    computed: {
+        contactsLength: function () {
+            return this.contacts.length;
+        }
     },
     methods: {
         addContact: function (contact) {
@@ -77,21 +101,45 @@ new Vue({
             this.isConfirmedPhone = this.contacts.findIndex(function (contact) {
                 return contact.phone === phone;
             }) !== -1;
-
-            this.$nextTick(function () {
-                console.log("nextTick in parent component in scream function: " + this.isConfirmedPhone);
-            });
         },
         deleteContact: function (contact) {
+            var deletedContactsCount = 0;
+
             this.contacts = this.contacts.filter(function (e) {
-                return e !== contact;
+                if ((e !== contact) && (e.isSelected === false)) {
+                    e.id = e.id - deletedContactsCount;
+                    return true;
+                }
+
+                ++deletedContactsCount;
+                this.isAllSelected = false;
+                return false;
             });
+        },
+        selectAll: function () {
+            var self = this;
+            this.contacts.forEach(function (contact) {
+                contact.isSelected = !self.isAllSelected;
+            });
+        },
+        search: function (searchText) {
+            var text = searchText.toUpperCase();
+
+            this.contacts.forEach(function (contact) {
+                contact.isShowing = contact.name.toUpperCase().indexOf(text) >= 0
+                    || contact.surname.toUpperCase().indexOf(text) >= 0
+                    || contact.phone.toUpperCase().indexOf(text) >= 0
+            });
+        },
+        cancelSearch: function () {
+
         },
         hideModal: function () {
             this.$refs['modal'].hide();
         },
         confirm: function () {
-            this.deleteContact(this.currentContact);
+            var self = this;
+            this.deleteContact(self.currentContact);
             this.$refs['modal'].hide();
         },
         showModal: function (contact) {
@@ -100,4 +148,5 @@ new Vue({
         }
     }
 });
+
 

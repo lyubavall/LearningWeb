@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>Phone Book</title>
     <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap-vue/dist/bootstrap-vue.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -14,13 +15,13 @@
     <div class="main-container px-2">
         <div class="wrapper flex-grow-1">
             <header class="header pt-3">
-                <div class="title py-lg-8 py-4 rounded">
+                <div class="title pl-5 py-lg-8 py-4 rounded">
                     <div class="col-12 col-lg-8">
-                        <h1 class="display-4 font-italic">Телефонная книга</h1>
+                        <h1 class="display-4 m-0 font-italic">Телефонная книга</h1>
                     </div>
                 </div>
 
-                <nav class="nav pl-5">
+                <nav class="nav px-5 py-2 d-flex justify-content-between">
                     <div class="pr-2">
                         <button v-if="!needForm" @click="needForm = true" type="button" class="btn btn-link">Добавить
                             новый контакт
@@ -30,36 +31,36 @@
                         </button>
                     </div>
 
-                    <div>
-                        <button type="button" class="btn btn-link">Найти контакт</button>
-                    </div>
+                    <search-panel @search-contact="search"></search-panel>
                 </nav>
             </header>
 
-            <add-contact v-if="needForm" @add-contact="addContact" @confirm-phone="confirmPhone" :is-confirmed-phone.sync="isConfirmedPhone"></add-contact>
+            <add-contact v-if="needForm" @add-contact="addContact" @confirm-phone="confirmPhone"
+                         :is-confirmed-phone="isConfirmedPhone" :contacts-count="contactsLength"></add-contact>
 
-            <b-modal ref="modal" hide-footer hide-header>Удалить контакт?
-                <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Отмена</b-button>
-                <b-button class="mt-2" variant="outline-warning" block @click="confirm">Удалить</b-button>
+            <b-modal ref="modal" hide-footer hide-header>Удалить контакт(ы)?
+                <b-button class="mt-3" variant="outline-warning" block @click="hideModal">Отмена</b-button>
+                <b-button class="mt-2" variant="outline-danger" block @click="confirm">Удалить</b-button>
             </b-modal>
 
             <div class="phone-table table-responsive-md">
                 <table class="table table-striped">
                     <thead>
                     <tr class="d-flex">
-                        <th class="col-1 p-1 p-lg-3"><input type="checkbox" id="checkall"/></th>
+                        <th class="col-1 p-1 p-lg-3"><input v-model="isAllSelected" @input="selectAll" type="checkbox"/>
+                        </th>
                         <th class="col-1 p-1 p-lg-3">№</th>
                         <th class="col-3 p-1 p-lg-3">Фамилия</th>
                         <th class="col-3 p-1 p-lg-3">Имя</th>
                         <th class="col-3 p-1 p-lg-3">Номер телефона</th>
                         <th class="col-1 p-1 p-lg-3"></th>
-                    </thead>
                     </tr>
+                    </thead>
 
                     <tbody class="table-striped">
-                    <tr v-for="(contact, index) in contacts" :key="index" class="d-flex">
-                        <td class="col-1 p-1 p-lg-3"><input type="checkbox" class="checkthis"/></td>
-                        <td class="col-1 p-1 p-lg-3">{{index + 1}}</td>
+                    <tr v-for="contact in contacts" v-if="contact.isShowing" :key="contact.id" class="d-flex">
+                        <td class="col-1 p-1 p-lg-3"><input v-model="contact.isSelected" type="checkbox"/></td>
+                        <td v-text="contact.id" class="col-1 p-1 p-lg-3"></td>
                         <td v-text="contact.surname" class="col-3 p-1 p-lg-3"></td>
                         <td v-text="contact.name" class="col-3 p-1 p-lg-3"></td>
                         <td v-text="contact.phone" class="col-3 p-1 p-lg-3"></td>
@@ -75,7 +76,7 @@
         </div>
 
         <footer class="footer rounded">
-            <p><a href="#">Наверх</a></p>
+            <p class="mb-0"><a href="#">Наверх</a></p>
         </footer>
     </div>
 </div>
@@ -84,19 +85,23 @@
     <div class="form-group py-2">
         <div class="pb-2">
             <label for="surname">Фамилия</label>
-            <input v-model="surname" type="text" :class="{ 'is-invalid': attemptAdd && missingSurname }" class="form-control" id="surname" required>
+            <input v-model="surname" type="text" :class="{ 'is-invalid': attemptAdd && missingSurname }"
+                   class="form-control" id="surname" required>
             <div class="invalid-feedback">Введите фамилию</div>
         </div>
 
         <div class="pb-2">
             <label for="name">Имя</label>
-            <input v-model="name" type="text" :class="{ 'is-invalid': attemptAdd && missingName }" class="form-control" id="name" required>
+            <input v-model="name" type="text" :class="{ 'is-invalid': attemptAdd && missingName }" class="form-control"
+                   id="name" required>
             <div class="invalid-feedback">Введите имя</div>
         </div>
 
         <div>
-            <label for="phone">Телефон</label>
-            <input v-model="phone" type="text" :class="{ 'is-invalid': (attemptAdd && missingPhone) ||  (attemptAdd && duplicatePhone)}" class="form-control" id="phone" required>
+            <label for="phone">Номер телефона</label>
+            <input v-model="phone" type="text"
+                   :class="{ 'is-invalid': (attemptAdd && missingPhone) ||  (attemptAdd && duplicatePhone)}"
+                   class="form-control" id="phone" required>
             <div class="invalid-feedback">
                 <div v-if="missingPhone">Введите телефон</div>
                 <div v-else>Контакт с таким номером уже существует</div>
@@ -107,10 +112,29 @@
     </div>
 </script>
 
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script id="search-panel-template" type="text/x-template">
+    <div class="search-panel pr-1">
+        <div class="input-group">
+            <input v-model="searchText" type="text" class="form-control" placeholder="Поиск"
+                   aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary material-icons search-button" @click="search"
+                        title="Найти контакт" type="button">search
+                </button>
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary search-button" @click="cancelSearch" title="Сбросить поиск"
+                        type="button">Отмена
+                </button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../node_modules/vue/dist/vue.js"></script>
-<script src="node_modules/bootstrap-vue/dist/bootstrap-vue.js"></script>
+<script src="../node_modules/bootstrap-vue/dist/bootstrap-vue.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
