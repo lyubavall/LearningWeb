@@ -11,11 +11,19 @@ function PhoneBookService() {
         });
     };
 
-    this.deleteContact = function (idSet) {
+    this.deleteContacts = function (idSet) {
+        return $.post({
+            url: "/deleteContacts",
+            contentType: "application/json",
+            data: JSON.stringify({idSet: idSet})
+        });
+    };
+
+    this.deleteContact = function (id) {
         return $.post({
             url: "/deleteContact",
             contentType: "application/json",
-            data: JSON.stringify({idSet: idSet})
+            data: JSON.stringify({id: id})
         });
     };
 }
@@ -71,7 +79,6 @@ Vue.component("add-contact", {
                     surname: this.surname,
                     phone: this.phone,
                     isSelected: false,
-                    isShowing: true
                 });
 
                 this.surname = "";
@@ -156,17 +163,10 @@ new Vue({
         },
         deleteContact: function (id) {
             var self = this;
-            var idSet = [id];
 
-            this.contacts.forEach(function (contact) {
-                if (contact.isSelected === true) {
-                    idSet.push(contact.id);
-                }
-            });
-
-            bootbox.confirm("Удалить контакт(ы)?", function (result) {
+            bootbox.confirm("Удалить контакт?", function (result) {
                 if (result) {
-                    self.service.deleteContact(idSet).done(function (response) {
+                    self.service.deleteContact(id).done(function (response) {
                         if (!response.success) {
                             alert(response.message);
                             return;
@@ -177,19 +177,39 @@ new Vue({
                 }
             });
         },
+        deleteContacts: function () {
+            var self = this;
+            var idSet = [];
+
+            this.contacts.forEach(function (contact) {
+                if (contact.isSelected === true) {
+                    idSet.push(contact.id);
+                }
+            });
+
+            if (idSet.length === 0) {
+                bootbox.alert("Нет выбранных контактов");
+                return;
+            }
+
+            bootbox.confirm("Удалить выбранные контакты?", function (result) {
+                if (result) {
+                    self.service.deleteContacts(idSet).done(function (response) {
+                        if (!response.success) {
+                            alert(response.message);
+                            return;
+                        }
+
+                        self.isAllSelected = false;
+                        self.getContacts();
+                    });
+                }
+            });
+        },
         selectAll: function () {
             var self = this;
             this.contacts.forEach(function (contact) {
                 contact.isSelected = !self.isAllSelected;
-            });
-        },
-        search: function (searchText) {
-            var text = searchText.toUpperCase();
-
-            this.contacts.forEach(function (contact) {
-                contact.isShowing = contact.name.toUpperCase().indexOf(text) >= 0
-                    || contact.surname.toUpperCase().indexOf(text) >= 0
-                    || contact.phone.toUpperCase().indexOf(text) >= 0
             });
         }
     }

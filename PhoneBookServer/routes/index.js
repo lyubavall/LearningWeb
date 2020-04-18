@@ -18,7 +18,7 @@ router.get("/getContacts", function (req, res) {
     res.send(filteredContacts);
 });
 
-router.post("/deleteContact", function (req, res) {
+router.post("/deleteContacts", function (req, res) {
     var idSet = req.body.idSet;
     var contactsCountBeforeDeletion = contacts.length;
 
@@ -29,6 +29,29 @@ router.post("/deleteContact", function (req, res) {
 
     contacts = contacts.filter(function (contact) {
         return !idSetMap[contact.id];
+    });
+
+    if (contactsCountBeforeDeletion === contacts.length) {
+        res.send({
+            success: false,
+            message: "Removal failed"
+        });
+
+        return;
+    }
+
+    res.send({
+        success: true,
+        message: null
+    });
+});
+
+router.post("/deleteContact", function (req, res) {
+    var id = req.body.id;
+    var contactsCountBeforeDeletion = contacts.length;
+
+    contacts = contacts.filter(function (contact) {
+        return contact.id !== id;
     });
 
     if (contactsCountBeforeDeletion === contacts.length) {

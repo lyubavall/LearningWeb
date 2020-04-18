@@ -33,10 +33,6 @@ h1 {
   }
 }
 
-nav.nav {
-  text-align: justify;
-}
-
 .nav button {
   color: #6c757d;
 }
@@ -45,14 +41,10 @@ div.form-group {
   width: 60%;
   margin: 0 auto;
 }
-.search-panel{
-  width: 100%;
-}
 
-@media (min-width: 960px) {
-  .search-panel {
-    width: 60%;
-  }
+div.search-panel {
+  width: 100%;
+  vertical-align: middle;
 }
 
 .search-button {

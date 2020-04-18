@@ -12,17 +12,20 @@
                     </div>
                 </div>
 
-                <nav class="nav px-5 py-3 d-flex justify-content-between">
-                    <div class="pr-2">
-                        <button v-if="!needForm" @click="needForm = true" type="button" class="btn btn-link">Добавить
-                            новый контакт
-                        </button>
-                        <button v-if="needForm" @click="needForm = false" type="button" class="btn btn-link">Скрыть
-                            форму
-                        </button>
-                    </div>
+                <nav class="row nav py-2 pr-1">
+                    <button v-if="!needForm" @click="needForm = true" type="button"
+                            class="btn btn-link col-12 col-md-3">Добавить
+                        новый контакт
+                    </button>
+                    <button v-if="needForm" @click="needForm = false" type="button"
+                            class="btn btn-link col-12 col-md-3">Скрыть
+                        форму
+                    </button>
+                    <button @click="deleteContacts" type="button" class="btn btn-link col-12 col-md-3">Удалить выбранные
+                        контакты
+                    </button>
 
-                    <search-panel @search-contact="getContacts"></search-panel>
+                    <search-panel class="col-12 col-md-6" @search-contact="getContacts"></search-panel>
                 </nav>
             </header>
 
@@ -68,7 +71,7 @@
 </div>
 
 <script id="add-contact-template" type="text/x-template">
-    <div class="form-group py-2">
+    <div class="form-group py-3">
         <div class="pb-2">
             <label for="surname">Фамилия</label>
             <input v-model="surname" type="text" :class="{ 'is-invalid': attemptAdd && missingSurname }"
@@ -100,7 +103,7 @@
 </script>
 
 <script id="search-panel-template" type="text/x-template">
-    <div class="search-panel pr-1">
+    <div class="search-panel">
         <div class="input-group">
             <input v-model="term" type="text" class="form-control" placeholder="Поиск"
                    aria-label="Recipient's username" aria-describedby="basic-addon2">
