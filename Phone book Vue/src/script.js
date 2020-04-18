@@ -5,6 +5,7 @@ Vue.component("add-contact", {
     },
     data: function () {
         return {
+            id: "",
             surname: "",
             name: "",
             phone: "",
@@ -23,9 +24,6 @@ Vue.component("add-contact", {
         },
         missingPhone: function () {
             return this.phone === "";
-        },
-        id: function () {
-            return this.contactsCount + 1;
         }
     },
     methods: {
@@ -52,6 +50,7 @@ Vue.component("add-contact", {
                     isShowing: true
                 });
 
+                ++this.id;
                 this.surname = "";
                 this.name = "";
                 this.phone = "";
@@ -98,26 +97,46 @@ new Vue({
             this.contacts.push(contact);
         },
         confirmPhone: function (phone) {
-            this.isConfirmedPhone = this.contacts.findIndex(function (contact) {
+            this.isConfirmedPhone = this.contacts.some(function (contact) {
                 return contact.phone === phone;
-            }) !== -1;
+            });
         },
         deleteContact: function (contact) {
-            var deletedContactsCount = 0;
+            var self = this;
 
-            this.contacts = this.contacts.filter(function (e) {
-                if ((e !== contact) && (e.isSelected === false)) {
-                    e.id = e.id - deletedContactsCount;
-                    return true;
+            bootbox.confirm("Удалить контакт?", function (result) {
+                if (result) {
+                    self.contacts = self.contacts.filter(function (e) {
+                        return e !== contact;
+                    });
+                }
+            });
+        },
+        deleteContacts: function (contact) {
+            var isContactSelected = this.contacts.some(function (contact) {
+                return contact.isSelected === true;
+            });
+
+            if (!isContactSelected) {
+                bootbox.alert("Нет выбранных контактов");
+                return;
+            }
+
+            var self = this;
+
+            bootbox.confirm("Удалить выбранные контакты?", function (result) {
+                if (result) {
+                    self.contacts = self.contacts.filter(function (e) {
+                        return e.isSelected === false;
+                    });
                 }
 
-                ++deletedContactsCount;
-                this.isAllSelected = false;
-                return false;
+                self.isAllSelected = false;
             });
         },
         selectAll: function () {
             var self = this;
+
             this.contacts.forEach(function (contact) {
                 contact.isSelected = !self.isAllSelected;
             });
@@ -128,23 +147,12 @@ new Vue({
             this.contacts.forEach(function (contact) {
                 contact.isShowing = contact.name.toUpperCase().indexOf(text) >= 0
                     || contact.surname.toUpperCase().indexOf(text) >= 0
-                    || contact.phone.toUpperCase().indexOf(text) >= 0
-            });
-        },
-        cancelSearch: function () {
+                    || contact.phone.toUpperCase().indexOf(text) >= 0;
 
-        },
-        hideModal: function () {
-            this.$refs['modal'].hide();
-        },
-        confirm: function () {
-            var self = this;
-            this.deleteContact(self.currentContact);
-            this.$refs['modal'].hide();
-        },
-        showModal: function (contact) {
-            this.$refs['modal'].show();
-            this.currentContact = contact;
+                if (contact.isShowing === false) {
+                    contact.isSelected = false;
+                }
+            });
         }
     }
 });
