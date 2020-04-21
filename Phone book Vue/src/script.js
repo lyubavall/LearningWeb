@@ -104,11 +104,22 @@ new Vue({
         deleteContact: function (contact) {
             var self = this;
 
-            bootbox.confirm("Удалить контакт?", function (result) {
-                if (result) {
-                    self.contacts = self.contacts.filter(function (e) {
-                        return e !== contact;
-                    });
+            bootbox.confirm({
+                message: "Удалить контакт?",
+                buttons: {
+                    confirm: {
+                        label: 'Да',
+                    },
+                    cancel: {
+                        label: 'Нет',
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        self.contacts = self.contacts.filter(function (e) {
+                            return e !== contact;
+                        });
+                    }
                 }
             });
         },
@@ -124,14 +135,25 @@ new Vue({
 
             var self = this;
 
-            bootbox.confirm("Удалить выбранные контакты?", function (result) {
-                if (result) {
-                    self.contacts = self.contacts.filter(function (e) {
-                        return e.isSelected === false;
-                    });
-                }
+            bootbox.confirm({
+                message: "Удалить контакт?",
+                buttons: {
+                    confirm: {
+                        label: 'Да',
+                    },
+                    cancel: {
+                        label: 'Нет',
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        self.contacts = self.contacts.filter(function (e) {
+                            return e.isSelected === false;
+                        });
 
-                self.isAllSelected = false;
+                        self.isAllSelected = false;
+                    }
+                }
             });
         },
         selectAll: function () {

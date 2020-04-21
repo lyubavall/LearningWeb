@@ -68,11 +68,6 @@ button.delete-button {
     border-bottom: 1px solid #c9956d !important;
 }
 
-.table td, .table th {
-    vertical-align: center;
-    text-align: center;
-}
-
 .table-striped tbody tr:nth-of-type(odd) {
     background: linear-gradient(to bottom, #f5f1e6, #f9f9f9);
 }
