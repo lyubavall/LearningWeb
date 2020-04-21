@@ -1,31 +1,27 @@
 function PhoneBookService() {
     this.getContacts = function (term) {
-        return $.get("/getContacts?term=" + term);
+        return $.get("/getContacts", {term: term});
     };
 
     this.addContact = function (contact) {
-        return $.post({
-            url: "/addContact",
-            contentType: "application/json",
-            data: JSON.stringify({request: contact})
-        });
+        return post("/addContact", contact);
     };
 
     this.deleteContacts = function (idSet) {
-        return $.post({
-            url: "/deleteContacts",
-            contentType: "application/json",
-            data: JSON.stringify({idSet: idSet})
-        });
+        return post("/deleteContacts", idSet);
     };
 
     this.deleteContact = function (id) {
-        return $.post({
-            url: "/deleteContact",
-            contentType: "application/json",
-            data: JSON.stringify({id: id})
-        });
+        return post("/deleteContact", id);
     };
+}
+
+function post(url, data) {
+    return $.post({
+        url: url,
+        contentType: "application/json",
+        data: JSON.stringify({request: data})
+    });
 }
 
 Vue.component("add-contact", {
@@ -91,6 +87,7 @@ Vue.component("add-contact", {
             this.surname = "";
             this.name = "";
             this.phone = "";
+            this.attemptAdd = false
         }
     }
 });
@@ -164,16 +161,27 @@ new Vue({
         deleteContact: function (id) {
             var self = this;
 
-            bootbox.confirm("Удалить контакт?", function (result) {
-                if (result) {
-                    self.service.deleteContact(id).done(function (response) {
-                        if (!response.success) {
-                            alert(response.message);
-                            return;
-                        }
+            bootbox.confirm({
+                message: "Удалить контакт?",
+                buttons: {
+                    confirm: {
+                        label: 'Да',
+                    },
+                    cancel: {
+                        label: 'Нет',
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        self.service.deleteContact(id).done(function (response) {
+                            if (!response.success) {
+                                alert(response.message);
+                                return;
+                            }
 
-                        self.getContacts();
-                    });
+                            self.getContacts();
+                        });
+                    }
                 }
             });
         },
@@ -192,17 +200,28 @@ new Vue({
                 return;
             }
 
-            bootbox.confirm("Удалить выбранные контакты?", function (result) {
-                if (result) {
-                    self.service.deleteContacts(idSet).done(function (response) {
-                        if (!response.success) {
-                            alert(response.message);
-                            return;
-                        }
+            bootbox.confirm({
+                message: "Удалить выбранные контакты?",
+                buttons: {
+                    confirm: {
+                        label: 'Да',
+                    },
+                    cancel: {
+                        label: 'Нет',
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        self.service.deleteContacts(idSet).done(function (response) {
+                            if (!response.success) {
+                                alert(response.message);
+                                return;
+                            }
 
-                        self.isAllSelected = false;
-                        self.getContacts();
-                    });
+                            self.isAllSelected = false;
+                            self.getContacts();
+                        });
+                    }
                 }
             });
         },

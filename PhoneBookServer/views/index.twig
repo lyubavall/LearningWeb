@@ -12,6 +12,7 @@
                     </div>
                 </div>
 
+                <div class="container">
                 <nav class="row nav py-2 pr-1">
                     <button v-if="!needForm" @click="needForm = true" type="button"
                             class="btn btn-link col-12 col-md-3">Добавить
@@ -27,6 +28,8 @@
 
                     <search-panel class="col-12 col-md-6" @search-contact="getContacts"></search-panel>
                 </nav>
+                </div>
+
             </header>
 
             <add-contact v-if="needForm" @add-contact="addContact" @confirm-phone="confirmPhone"
@@ -35,25 +38,25 @@
             <div class="phone-table table-responsive-md">
                 <table class="table table-striped">
                     <thead>
-                    <tr class="d-flex">
-                        <th class="col-1 p-1 p-lg-3"><input v-model="isAllSelected" @input="selectAll" type="checkbox"/>
+                    <tr>
+                        <th><input v-model="isAllSelected" @input="selectAll" type="checkbox"/>
                         </th>
-                        <th class="col-1 p-1 p-lg-3">№</th>
-                        <th class="col-3 p-1 p-lg-3">Фамилия</th>
-                        <th class="col-3 p-1 p-lg-3">Имя</th>
-                        <th class="col-3 p-1 p-lg-3">Номер телефона</th>
-                        <th class="col-1 p-1 p-lg-3"></th>
+                        <th>№</th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Номер телефона</th>
+                        <th></th>
                     </tr>
                     </thead>
 
-                    <tbody class="table-striped">
-                    <tr v-for="(contact, index) in contacts" :key="contact.id" class="d-flex">
-                        <td class="col-1 p-1 p-lg-3"><input v-model="contact.isSelected" type="checkbox"/></td>
-                        <td class="col-1 p-1 p-lg-3">{{ index + 1 }}.</td>
-                        <td v-text="contact.surname" class="col-3 p-1 p-lg-3"></td>
-                        <td v-text="contact.name" class="col-3 p-1 p-lg-3"></td>
-                        <td v-text="contact.phone" class="col-3 p-1 p-lg-3"></td>
-                        <td class="col-1 px-0 p-lg-3">
+                    <tbody>
+                    <tr v-for="(contact, index) in contacts" :key="contact.id">
+                        <td><input v-model="contact.isSelected" type="checkbox"/></td>
+                        <td>{{ index + 1 }}.</td>
+                        <td v-text="contact.surname"></td>
+                        <td v-text="contact.name"></td>
+                        <td v-text="contact.phone"></td>
+                        <td>
                             <button @click="deleteContact(contact.id)" class="delete-button" title="Удалить контакт">
                                 &#10006
                             </button>
@@ -89,7 +92,7 @@
         <div>
             <label for="phone">Номер телефона</label>
             <input v-model="phone" type="text"
-                   :class="{ 'is-invalid': (attemptAdd && missingPhone) ||  (attemptAdd && isDuplicatePhone)}"
+                   :class="{ 'is-invalid': attemptAdd && (missingPhone || isDuplicatePhone) }"
                    class="form-control" id="phone" required>
             <div class="invalid-feedback">
                 <div v-if="missingPhone">Введите телефон</div>

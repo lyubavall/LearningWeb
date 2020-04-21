@@ -10,16 +10,16 @@ router.get("/getContacts", function (req, res) {
     var filteredContacts = term.length === 0
         ? contacts
         : contacts.filter(function (contact) {
-            return contact.name.toUpperCase().indexOf(term) >= 0
-                || contact.surname.toUpperCase().indexOf(term) >= 0
-                || contact.phone.toUpperCase().indexOf(term) >= 0
+            return contact.name.toUpperCase().includes(term)
+                || contact.surname.toUpperCase().includes(term)
+                || contact.phone.toUpperCase().includes(term)
         });
 
     res.send(filteredContacts);
 });
 
 router.post("/deleteContacts", function (req, res) {
-    var idSet = req.body.idSet;
+    var idSet = req.body.request;
     var contactsCountBeforeDeletion = contacts.length;
 
     var idSetMap = idSet.reduce(function (map, id) {
@@ -47,7 +47,7 @@ router.post("/deleteContacts", function (req, res) {
 });
 
 router.post("/deleteContact", function (req, res) {
-    var id = req.body.id;
+    var id = req.body.request;
     var contactsCountBeforeDeletion = contacts.length;
 
     contacts = contacts.filter(function (contact) {
