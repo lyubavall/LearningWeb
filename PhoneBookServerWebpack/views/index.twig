@@ -1,0 +1,77 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+  {% verbatim %}
+  <div v-cloak id="phone-book">
+    <div class="main-container px-2">
+        <div class="wrapper flex-grow-1">
+            <header class="header pt-3">
+                <div class="title pl-5 py-lg-8 py-4 rounded">
+                    <div class="col-12 col-lg-8">
+                        <h1 class="display-4 m-0 font-italic">Телефонная книга</h1>
+                    </div>
+                </div>
+
+                <div class="container">
+                <nav class="row nav py-2 pr-1">
+                    <button v-if="!needForm" @click="needForm = true" type="button"
+                            class="btn btn-link col-12 col-md-3">Добавить
+                        новый контакт
+                    </button>
+                    <button v-if="needForm" @click="needForm = false" type="button"
+                            class="btn btn-link col-12 col-md-3">Скрыть
+                        форму
+                    </button>
+                    <button @click="deleteContacts" type="button" class="btn btn-link col-12 col-md-3">Удалить выбранные
+                        контакты
+                    </button>
+
+                    <search-panel class="col-12 col-md-6" @search-contact="getContacts"></search-panel>
+                </nav>
+                </div>
+
+            </header>
+
+            <add-contact v-if="needForm" @add-contact="addContact" @confirm-phone="confirmPhone"
+                         :is-confirmed-phone="isConfirmedPhone" :contacts-count="contactsLength"></add-contact>
+
+            <div class="phone-table table-responsive-md">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><input v-model="isAllSelected" @input="selectAll" type="checkbox"/>
+                        </th>
+                        <th>№</th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Номер телефона</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr v-for="(contact, index) in contacts" :key="contact.id">
+                        <td><input v-model="contact.isSelected" type="checkbox"/></td>
+                        <td>{{ index + 1 }}.</td>
+                        <td v-text="contact.surname"></td>
+                        <td v-text="contact.name"></td>
+                        <td v-text="contact.phone"></td>
+                        <td>
+                            <button @click="deleteContact(contact.id)" class="delete-button" title="Удалить контакт">
+                                &#10006
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer rounded">
+            <p class="mb-0"><a href="#">Наверх</a></p>
+        </footer>
+    </div>
+</div>
+
+  {% endverbatim %}
+{% endblock %}
