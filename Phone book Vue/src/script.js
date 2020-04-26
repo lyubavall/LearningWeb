@@ -5,7 +5,7 @@ Vue.component("add-contact", {
     },
     data: function () {
         return {
-            id: "",
+            id: 0,
             surname: "",
             name: "",
             phone: "",
@@ -123,7 +123,7 @@ new Vue({
                 }
             });
         },
-        deleteContacts: function (contact) {
+        deleteContacts: function () {
             var isContactSelected = this.contacts.some(function (contact) {
                 return contact.isSelected === true;
             });
