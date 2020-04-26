@@ -49,9 +49,6 @@ Vue.component("add-contact", {
         },
         missingPhone: function () {
             return this.phone === "";
-        },
-        id: function () {
-            return this.contactsCount + 1;
         }
     },
     methods: {
@@ -70,11 +67,10 @@ Vue.component("add-contact", {
                 }
 
                 this.$emit("add-contact", {
-                    id: this.id,
                     name: this.name,
                     surname: this.surname,
                     phone: this.phone,
-                    isSelected: false,
+                    isSelected: false
                 });
 
                 this.surname = "";
@@ -116,10 +112,10 @@ new Vue({
         service: new PhoneBookService(),
 
         contacts: [],
-        needForm: false,
+        showForm: false,
         currentContactId: null,
         isConfirmedPhone: false,
-        isAllSelected: false,
+        isAllSelected: false
     },
     computed: {
         contactsLength: function () {
@@ -165,23 +161,25 @@ new Vue({
                 message: "Удалить контакт?",
                 buttons: {
                     confirm: {
-                        label: 'Да',
+                        label: 'Да'
                     },
                     cancel: {
-                        label: 'Нет',
+                        label: 'Нет'
                     }
                 },
                 callback: function (result) {
-                    if (result) {
-                        self.service.deleteContact(id).done(function (response) {
-                            if (!response.success) {
-                                alert(response.message);
-                                return;
-                            }
-
-                            self.getContacts();
-                        });
+                    if (!result) {
+                        return;
                     }
+
+                    self.service.deleteContact(id).done(function (response) {
+                        if (!response.success) {
+                            alert(response.message);
+                            return;
+                        }
+
+                        self.getContacts();
+                    });
                 }
             });
         },
@@ -204,24 +202,26 @@ new Vue({
                 message: "Удалить выбранные контакты?",
                 buttons: {
                     confirm: {
-                        label: 'Да',
+                        label: 'Да'
                     },
                     cancel: {
-                        label: 'Нет',
+                        label: 'Нет'
                     }
                 },
                 callback: function (result) {
-                    if (result) {
-                        self.service.deleteContacts(idSet).done(function (response) {
-                            if (!response.success) {
-                                alert(response.message);
-                                return;
-                            }
-
-                            self.isAllSelected = false;
-                            self.getContacts();
-                        });
+                    if (!result) {
+                        return;
                     }
+
+                    self.service.deleteContacts(idSet).done(function (response) {
+                        if (!response.success) {
+                            alert(response.message);
+                            return;
+                        }
+
+                        self.isAllSelected = false;
+                        self.getContacts();
+                    });
                 }
             });
         },
