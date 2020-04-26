@@ -14,11 +14,11 @@
 
                 <div class="container">
                 <nav class="row nav py-2 pr-1">
-                    <button v-if="!needForm" @click="needForm = true" type="button"
+                    <button v-if="!showForm" @click="showForm = true" type="button"
                             class="btn btn-link col-12 col-md-3">Добавить
                         новый контакт
                     </button>
-                    <button v-if="needForm" @click="needForm = false" type="button"
+                    <button v-if="showForm" @click="showForm = false" type="button"
                             class="btn btn-link col-12 col-md-3">Скрыть
                         форму
                     </button>
@@ -32,7 +32,7 @@
 
             </header>
 
-            <add-contact v-if="needForm" @add-contact="addContact" @confirm-phone="confirmPhone"
+            <add-contact v-if="showForm" @add-contact="addContact" @confirm-phone="confirmPhone"
                          :is-confirmed-phone="isConfirmedPhone" :contacts-count="contactsLength"></add-contact>
 
             <div class="phone-table table-responsive-md">

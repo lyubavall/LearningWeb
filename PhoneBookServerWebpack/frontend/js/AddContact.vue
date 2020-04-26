@@ -55,9 +55,6 @@
             },
             missingPhone() {
                 return this.phone === "";
-            },
-            id() {
-                return this.contactsCount + 1;
             }
         },
         methods: {
@@ -76,7 +73,6 @@
                     }
 
                     this.$emit("add-contact", {
-                        id: this.id,
                         name: this.name,
                         surname: this.surname,
                         phone: this.phone,

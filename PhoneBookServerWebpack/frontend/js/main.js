@@ -45,10 +45,10 @@ new Vue({
         service: new PhoneBookService(),
 
         contacts: [],
-        needForm: false,
+        showForm: false,
         currentContactId: null,
         isConfirmedPhone: false,
-        isAllSelected: false,
+        isAllSelected: false
     },
     computed: {
         contactsLength() {
@@ -90,23 +90,25 @@ new Vue({
                 message: "Удалить контакт?",
                 buttons: {
                     confirm: {
-                        label: 'Да',
+                        label: 'Да'
                     },
                     cancel: {
-                        label: 'Нет',
+                        label: 'Нет'
                     }
                 },
                 callback(result) {
-                    if (result) {
-                        self.service.deleteContact(id).done(response => {
-                            if (!response.success) {
-                                alert(response.message);
-                                return;
-                            }
-
-                            self.getContacts();
-                        });
+                    if (!result) {
+                        return;
                     }
+
+                    self.service.deleteContact(id).done(response => {
+                        if (!response.success) {
+                            alert(response.message);
+                            return;
+                        }
+
+                        self.getContacts();
+                    });
                 }
             });
         },
@@ -129,24 +131,26 @@ new Vue({
                 message: "Удалить выбранные контакты?",
                 buttons: {
                     confirm: {
-                        label: 'Да',
+                        label: 'Да'
                     },
                     cancel: {
-                        label: 'Нет',
+                        label: 'Нет'
                     }
                 },
                 callback(result) {
-                    if (result) {
-                        self.service.deleteContacts(idSet).done(response => {
-                            if (!response.success) {
-                                alert(response.message);
-                                return;
-                            }
-
-                            self.isAllSelected = false;
-                            self.getContacts();
-                        });
+                    if (!result) {
+                        return;
                     }
+
+                    self.service.deleteContacts(idSet).done(response => {
+                        if (!response.success) {
+                            alert(response.message);
+                            return;
+                        }
+
+                        self.isAllSelected = false;
+                        self.getContacts();
+                    });
                 }
             });
         },
