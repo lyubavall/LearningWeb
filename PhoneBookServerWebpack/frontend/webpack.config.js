@@ -4,13 +4,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-    entry: "./frontend/js/main.js",
+    entry: "./js/main.js",
 
     devtool: "source-map",
 
     output: {
         filename: "phone-book.js",
-        path: path.resolve(__dirname, "public")
+        path: path.resolve(__dirname, "../public")
     },
 
     module: {

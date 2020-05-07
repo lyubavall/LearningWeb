@@ -2,14 +2,15 @@
     <div class="form-group py-3">
         <div class="pb-2">
             <label for="surname">Фамилия</label>
-            <input v-model="surname" type="text" :class="{ 'is-invalid': attemptAdd && missingSurname }"
+            <input v-model="surname" type="text" :class="{ 'is-invalid': attemptAdd && isMissingSurname }"
                    class="form-control" id="surname" required>
             <div class="invalid-feedback">Введите фамилию</div>
         </div>
 
         <div class="pb-2">
             <label for="name">Имя</label>
-            <input v-model="name" type="text" :class="{ 'is-invalid': attemptAdd && missingName }" class="form-control"
+            <input v-model="name" type="text" :class="{ 'is-invalid': attemptAdd && isMissingName }"
+                   class="form-control"
                    id="name" required>
             <div class="invalid-feedback">Введите имя</div>
         </div>
@@ -17,10 +18,10 @@
         <div>
             <label for="phone">Номер телефона</label>
             <input v-model="phone" type="text"
-                   :class="{ 'is-invalid': attemptAdd && (missingPhone || isDuplicatePhone) }"
+                   :class="{ 'is-invalid': attemptAdd && (isMissingPhone || isDuplicatePhone) }"
                    class="form-control" id="phone" required>
             <div class="invalid-feedback">
-                <div v-if="missingPhone">Введите телефон</div>
+                <div v-if="isMissingPhone">Введите телефон</div>
                 <div v-else>Контакт с таким номером уже существует</div>
             </div>
         </div>
@@ -33,7 +34,6 @@
 <script>
     export default {
         props: {
-            isConfirmedPhone: Boolean,
             contactsCount: null
         },
         data() {
@@ -47,13 +47,13 @@
             }
         },
         computed: {
-            missingSurname() {
+            isMissingSurname() {
                 return this.surname === "";
             },
-            missingName() {
+            isMissingName() {
                 return this.name === "";
             },
-            missingPhone() {
+            isMissingPhone() {
                 return this.phone === "";
             }
         },
@@ -61,28 +61,15 @@
             addContact() {
                 this.attemptAdd = true;
 
-                if (this.phone !== "") {
-                    this.$emit("confirm-phone", this.phone)
+                if (this.isMissingSurname || this.isMissingName || this.isMissingPhone) {
+                    return;
                 }
 
-                this.$nextTick(function () {
-                    this.isDuplicatePhone = this.isConfirmedPhone;
-
-                    if (this.missingSurname || this.missingName || this.missingPhone || this.isDuplicatePhone) {
-                        return;
-                    }
-
-                    this.$emit("add-contact", {
-                        name: this.name,
-                        surname: this.surname,
-                        phone: this.phone,
-                        isSelected: false,
-                    });
-
-                    this.surname = "";
-                    this.name = "";
-                    this.phone = "";
-                    this.attemptAdd = this.isSelected;
+                this.$emit("add-contact", {
+                    name: this.name,
+                    surname: this.surname,
+                    phone: this.phone,
+                    isSelected: false,
                 });
             },
             cleanAddForm() {
@@ -90,6 +77,12 @@
                 this.name = "";
                 this.phone = "";
                 this.attemptAdd = false
+            },
+            showErrorPhoneMessage() {
+                this.isDuplicatePhone = true;
+            },
+            hideErrorPhoneMessage() {
+                this.isDuplicatePhone = false;
             }
         }
     };

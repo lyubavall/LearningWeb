@@ -1,7 +1,7 @@
 {% extends 'layout.twig' %}
 
 {% block body %}
-  {% verbatim %}
+    {% verbatim %}
   <div v-cloak id="phone-book">
     <div class="main-container px-2">
         <div class="wrapper flex-grow-1">
@@ -32,8 +32,7 @@
 
             </header>
 
-            <add-contact v-if="showForm" @add-contact="addContact" @confirm-phone="confirmPhone"
-                         :is-confirmed-phone="isConfirmedPhone" :contacts-count="contactsLength"></add-contact>
+            <add-contact ref="addContactForm" v-if="showForm" @add-contact="addContact"></add-contact>
 
             <div class="phone-table table-responsive-md">
                 <table class="table table-striped">

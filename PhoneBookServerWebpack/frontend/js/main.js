@@ -1,39 +1,13 @@
 import Vue from "vue";
-import $ from "jquery";
 import "bootstrap";
 import bootbox from "bootbox";
 
 import "bootstrap/dist/css/bootstrap.css"
-import "../scss/style.css"
+import "../scss/style.scss"
 
 import AddContact from "./AddContact.vue";
 import SearchPanel from "./SearchPanel.vue";
-
-function PhoneBookService() {
-    this.getContacts = function (term) {
-        return $.get("/getContacts", {term: term});
-    };
-
-    this.addContact = function (contact) {
-        return post("/addContact", contact);
-    };
-
-    this.deleteContacts = function (idSet) {
-        return post("/deleteContacts", idSet);
-    };
-
-    this.deleteContact = function (id) {
-        return post("/deleteContact", id);
-    };
-}
-
-function post(url, data) {
-    return $.post({
-        url: url,
-        contentType: "application/json",
-        data: JSON.stringify({request: data})
-    });
-}
+import PhoneBookService from "./phoneBookService";
 
 new Vue({
     el: "#phone-book",
@@ -47,13 +21,7 @@ new Vue({
         contacts: [],
         showForm: false,
         currentContactId: null,
-        isConfirmedPhone: false,
         isAllSelected: false
-    },
-    computed: {
-        contactsLength() {
-            return this.contacts.length;
-        }
     },
     created() {
         this.getContacts();
@@ -71,20 +39,21 @@ new Vue({
         addContact(contact) {
             this.service.addContact(contact).done(response => {
                 if (!response.success) {
-                    alert(response.message);
-                    return;
+                    if (response.isDuplicatePhone) {
+                        this.$refs.addContactForm.showErrorPhoneMessage();
+                        return;
+                    } else {
+                        alert(response.message);
+                        return;
+                    }
                 }
 
                 this.getContacts();
+                this.$refs.addContactForm.cleanAddForm();
             });
         },
-        confirmPhone(phone) {
-            this.isConfirmedPhone = this.contacts.findIndex(contact => {
-                return contact.phone.toUpperCase() === phone.toUpperCase();
-            }) !== -1;
-        },
         deleteContact(id) {
-            let self = this;
+            const self = this;
 
             bootbox.confirm({
                 message: "Удалить контакт?",
@@ -108,13 +77,14 @@ new Vue({
                         }
 
                         self.getContacts();
+                        self.$refs.addContactForm.hideErrorPhoneMessage();
                     });
                 }
             });
         },
         deleteContacts() {
-            let self = this;
-            let idSet = [];
+            const self = this;
+            const idSet = [];
 
             this.contacts.forEach(contact => {
                 if (contact.isSelected === true) {
@@ -150,14 +120,13 @@ new Vue({
 
                         self.isAllSelected = false;
                         self.getContacts();
+                        self.$refs.addContactForm.hideErrorPhoneMessage();
                     });
                 }
             });
         },
         selectAll() {
-            this.contacts.forEach(contact => {
-                contact.isSelected = !this.isAllSelected;
-            });
+            this.contacts.forEach(contact => contact.isSelected = !this.isAllSelected);
         }
     }
 });

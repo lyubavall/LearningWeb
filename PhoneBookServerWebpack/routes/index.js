@@ -27,14 +27,12 @@ router.post("/deleteContacts", (req, res) => {
         return map;
     }, {});
 
-    contacts = contacts.filter(contact => {
-        return !idSetMap[contact.id];
-    });
+    contacts = contacts.filter(contact => !idSetMap[contact.id]);
 
     if (contactsCountBeforeDeletion === contacts.length) {
         res.send({
             success: false,
-            message: "Removal failed"
+            message: "Ошибка удаления"
         });
 
         return;
@@ -50,14 +48,12 @@ router.post("/deleteContact", (req, res) => {
     const id = req.body.request;
     const contactsCountBeforeDeletion = contacts.length;
 
-    contacts = contacts.filter(contact => {
-        return contact.id !== id;
-    });
+    contacts = contacts.filter(contact => contact.id !== id);
 
     if (contactsCountBeforeDeletion === contacts.length) {
         res.send({
             success: false,
-            message: "Removal failed"
+            message: "Ошибка удаления"
         });
 
         return;
@@ -75,20 +71,18 @@ router.post("/addContact", (req, res) => {
     if (contact.name === "" || contact.surname === "" || contact.phone === "") {
         res.send({
             success: false,
-            message: "Not all fields are filled"
+            message: "Не все поля заполнены"
         });
 
         return;
     }
 
-    const isDuplicatePhone = contacts.some(c => {
-        return c.phone.toUpperCase() === contact.phone.toUpperCase();
-    });
+    const isDuplicatePhone = contacts.some(c => c.phone.toUpperCase() === contact.phone.toUpperCase());
 
     if (isDuplicatePhone) {
         res.send({
             success: false,
-            message: "Contact with this phone already exists"
+            isDuplicatePhone: true
         });
 
         return;
